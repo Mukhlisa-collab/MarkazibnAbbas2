@@ -13,7 +13,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Jost:wght@400;500;600;700;800&family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
   :root{
@@ -29,6 +29,10 @@
     --radius: 18px;
     --shadow: 0 14px 34px rgba(15,59,46,0.18);
     --shadow-sm: 0 6px 16px rgba(15,59,46,0.12);
+    --font-display:'Cinzel', serif;
+    --font-heading:'Jost', sans-serif;
+    --font-body:'Jost', sans-serif;
+    --font-arabic:'Cairo', sans-serif;
   }
 
   *{box-sizing:border-box;}
@@ -37,15 +41,25 @@
     margin:0;
     background:var(--ivory-white);
     color:var(--ink);
-    font-family:'Cairo', sans-serif;
-    line-height:1.6;
+    font-family:var(--font-body);
+    line-height:1.7;
     overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
   }
-  h1,h2,h3,h4{
-    font-family:'Amiri', serif;
+  h1,h2{
+    font-family:var(--font-display);
+    font-weight:700;
+    letter-spacing:.015em;
     margin:0 0 .4em 0;
     color:var(--deep-green);
   }
+  h3,h4{
+    font-family:var(--font-heading);
+    font-weight:700;
+    margin:0 0 .4em 0;
+    color:var(--deep-green);
+  }
+  .arabic-text{font-family:var(--font-arabic);}
   a{color:inherit; text-decoration:none;}
   img{max-width:100%; display:block;}
   ul{margin:0; padding:0; list-style:none;}
@@ -83,36 +97,38 @@
     opacity:.85;
   }
 
-  /* ===== HEADER ===== */
+  /* ===== HEADER (matches logo's ivory background) ===== */
   header{
     position:sticky; top:0; z-index:1000;
-    background:var(--deep-green);
+    background:var(--ivory);
     border-bottom:3px solid var(--saffron);
+    box-shadow:0 2px 14px rgba(109,20,34,.08);
   }
   .nav-wrap{
     display:flex; align-items:center; justify-content:space-between;
-    padding:10px 6vw;
+    padding:8px 6vw;
     max-width:1400px; margin:0 auto;
   }
-  .brand{display:flex; align-items:center; gap:12px;}
-  .brand img{height:52px; width:auto;}
+  .brand{display:flex; align-items:center; gap:14px;}
+  .brand img{height:58px; width:auto;}
   .brand span{
-    font-family:'Amiri', serif;
-    color:var(--ivory);
-    font-size:1.25rem;
+    font-family:var(--font-display);
+    color:var(--deep-green);
+    font-size:1.3rem;
     font-weight:700;
-    letter-spacing:.02em;
+    letter-spacing:.03em;
   }
-  nav.links{display:flex; gap:28px;}
+  nav.links{display:flex; gap:30px;}
   nav.links a{
-    color:var(--ivory);
+    font-family:var(--font-heading);
+    color:var(--deep-green);
     font-weight:600;
-    font-size:.96rem;
+    font-size:.95rem;
     position:relative;
     padding:6px 0;
     transition:color .2s;
   }
-  nav.links a:hover{color:var(--saffron-light);}
+  nav.links a:hover{color:var(--copper);}
   nav.links a::after{
     content:"";
     position:absolute; left:0; bottom:0;
@@ -120,19 +136,19 @@
     transition:width .25s;
   }
   nav.links a:hover::after{width:100%;}
-  .nav-toggle{display:none; background:none; border:none; color:var(--ivory); font-size:1.6rem; cursor:pointer;}
+  .nav-toggle{display:none; background:none; border:none; color:var(--deep-green); font-size:1.6rem; cursor:pointer;}
 
   @media (max-width: 880px){
     nav.links{
       position:absolute; top:100%; left:0; right:0;
-      background:var(--deep-green);
+      background:var(--ivory);
       flex-direction:column; gap:0;
       max-height:0; overflow:hidden;
       transition:max-height .3s ease;
       border-bottom:3px solid var(--saffron);
     }
     nav.links.open{max-height:400px;}
-    nav.links a{padding:14px 6vw; border-top:1px solid rgba(255,255,255,.08);}
+    nav.links a{padding:14px 6vw; border-top:1px solid rgba(109,20,34,.1);}
     .nav-toggle{display:block;}
   }
 
@@ -143,7 +159,14 @@
     padding:52px 6vw 70px 6vw;
     overflow:hidden;
   }
-  .hero-lanterns{position:absolute; inset:0; pointer-events:none; opacity:.5;}
+  .hero-pattern{
+    position:absolute; inset:0; pointer-events:none;
+    opacity:.08;
+    background-image:
+      radial-gradient(circle at 10px 10px, var(--saffron) 1.6px, transparent 1.6px),
+      radial-gradient(circle at 30px 30px, var(--saffron) 1.6px, transparent 1.6px);
+    background-size:40px 40px;
+  }
   .hero-inner{
     position:relative; z-index:2;
     max-width:1200px; margin:0 auto;
@@ -202,14 +225,15 @@
     text-transform:uppercase;
     margin-bottom:22px;
   }
-  .placeholder-slide h3{color:var(--ivory-white); font-size:clamp(1.6rem,3vw,2.3rem); margin-bottom:.3em;}
-  .placeholder-slide .arabic{font-size:1.4rem; color:var(--saffron-light); margin-bottom:18px;}
+  .placeholder-slide h3{font-family:var(--font-display); color:var(--ivory-white); font-size:clamp(1.6rem,3vw,2.3rem); margin-bottom:.3em;}
+  .placeholder-slide .arabic{font-family:var(--font-arabic); font-size:1.4rem; color:var(--saffron-light); margin-bottom:18px;}
   .placeholder-slide p{color:#d9e8e0; max-width:420px;}
   .placeholder-slide .soon{
     margin-top:26px;
-    font-family:'Amiri', serif;
-    font-style:italic;
-    font-size:1.3rem;
+    font-family:var(--font-display);
+    font-style:normal;
+    font-size:1.2rem;
+    letter-spacing:.04em;
     color:var(--saffron-light);
   }
 
@@ -455,6 +479,39 @@
   .duroos-card .cap{padding:16px 20px;}
   .duroos-card h4{font-size:1.05rem; margin:0;}
 
+  .duroos-subhead{
+    max-width:1200px; margin:56px auto 26px auto;
+    display:flex; align-items:center; gap:16px;
+  }
+  .duroos-subhead h3{margin:0; font-size:1.15rem; white-space:nowrap;}
+  .duroos-subhead .rule{flex:1; height:1px; background:linear-gradient(90deg, var(--saffron), transparent);}
+
+  .playlist-card .duroos-thumb{
+    background:linear-gradient(150deg, var(--deep-green) 0%, var(--copper) 130%);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .playlist-card .duroos-thumb .badge-icon{
+    width:64px; height:64px; border-radius:50%;
+    background:rgba(255,255,255,.12);
+    border:2px solid var(--saffron-light);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .playlist-card .duroos-thumb .badge-icon svg{width:26px; height:26px; fill:var(--ivory-white);}
+  .playlist-card.coming-soon .duroos-thumb{
+    background:linear-gradient(150deg, #8a8f8c 0%, #565b58 130%);
+  }
+  .coming-soon-tag{
+    position:absolute; top:12px; right:12px;
+    background:var(--saffron);
+    color:var(--deep-green-2);
+    font-size:.68rem;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    padding:5px 12px;
+    border-radius:999px;
+  }
+
   /* ===== FOOTER ===== */
   footer{
     background:var(--deep-green-2);
@@ -469,8 +526,8 @@
   }
   .footer-grid h4{color:var(--ivory-white); font-size:1rem; margin-bottom:14px;}
   .footer-brand{display:flex; align-items:center; gap:10px; margin-bottom:14px;}
-  .footer-brand img{height:44px;}
-  .footer-brand span{font-family:'Amiri',serif; color:var(--ivory-white); font-size:1.15rem; font-weight:700;}
+  .footer-brand img{height:44px; border-radius:10px;}
+  .footer-brand span{font-family:var(--font-display); color:var(--ivory-white); font-size:1.15rem; font-weight:700;}
   footer ul li{margin-bottom:10px;}
   footer a:hover{color:var(--saffron-light);}
   .footer-bottom{
@@ -514,18 +571,7 @@
      change what appears in the slideshow.
      ============================================================ -->
 <section class="hero" id="home">
-  <svg class="hero-lanterns" viewBox="0 0 1200 300" preserveAspectRatio="none">
-    <g opacity="0.35">
-      <line x1="120" y1="0" x2="120" y2="55" stroke="#EF9410" stroke-width="2"/>
-      <rect x="100" y="55" width="40" height="55" rx="8" fill="none" stroke="#EF9410" stroke-width="2">
-        <animate attributeName="y" values="55;60;55" dur="4s" repeatCount="indefinite"/>
-      </rect>
-      <line x1="1080" y1="0" x2="1080" y2="40" stroke="#EF9410" stroke-width="2"/>
-      <rect x="1058" y="40" width="44" height="60" rx="9" fill="none" stroke="#EF9410" stroke-width="2">
-        <animate attributeName="y" values="40;46;40" dur="5s" repeatCount="indefinite"/>
-      </rect>
-    </g>
-  </svg>
+  <div class="hero-pattern"></div>
 
   <div class="hero-inner">
     <div class="eyebrow">Arabic Language &amp; Islamic Studies</div>
@@ -564,9 +610,9 @@
     <div class="slide-dots" id="slideDots"></div>
 
     <div class="cta-row">
-      <!-- EDIT HERE: replace # with your Google Form / registration link -->
-      <a href="#" class="btn btn-primary" target="_blank" rel="noopener">Register Now</a>
-      <a href="#courses" class="btn btn-outline">View Courses</a>
+      <a href="#courses" class="btn btn-primary">Explore Courses &amp; Register</a>
+      <!-- New / upcoming courses: WhatsApp channel join link -->
+      <a href="https://whatsapp.com/channel/0029VbBDGtIC6ZvgX7o1IO1y" class="btn btn-outline" target="_blank" rel="noopener">Join WhatsApp Channel</a>
     </div>
   </div>
 </section>
@@ -576,7 +622,7 @@
      EDIT HERE: replace the three # links with your real channel URLs.
      ============================================================ -->
 <div class="social-bar">
-  <a href="#" target="_blank" rel="noopener">
+  <a href="http://www.youtube.com/@MarkazIbnAbbas-n9b7u" target="_blank" rel="noopener">
     <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></svg>
     YouTube
   </a>
@@ -617,8 +663,7 @@
       </div>
       <div class="fee-row">
         <div class="fee">₹500/mo <small>Outside India: 50 SR/mo</small></div>
-        <!-- EDIT HERE: link to registration form or WhatsApp -->
-        <a href="#" class="mini-btn" target="_blank" rel="noopener">Register</a>
+        <a href="https://forms.gle/pqYfMePLKHdioCDX9" class="mini-btn" target="_blank" rel="noopener">Register</a>
       </div>
     </div>
 
@@ -636,23 +681,80 @@
       </div>
       <div class="fee-row">
         <div class="fee">₹600/mo <small>Outside India: 50 SR/mo</small></div>
-        <a href="#" class="mini-btn" target="_blank" rel="noopener">Register</a>
+        <a href="https://forms.gle/dJD5PykWvYS5yB5y8" class="mini-btn" target="_blank" rel="noopener">Register</a>
       </div>
     </div>
 
     <div class="course-card level-3">
       <div class="card-top">
+        <span class="tag">Level 3</span>
         <span class="tag">Ongoing</span>
-        <span class="tag">Sisters Only</span>
       </div>
       <h3>Spoken Arabic Course</h3>
       <div class="meta">
-        <span>&#128172; Conversational Arabic for daily use</span>
-        <span>&#128100; Details on request</span>
+        <span>&#128218; Al Arabiyatu Bayna Yadaik &mdash; Book 2, Part 1</span>
+        <span>&#128197; Started 12 May 2026 &middot; Mon&ndash;Thu</span>
+        <span>&#128337; 7:30&ndash;8:15 PM IST &middot; 3 months/level</span>
+        <span>&#128100; Shaikh Yousuf Madani Hafizahullah</span>
+        <span>&#9888;&#65039; Mid-course admission requires a test</span>
       </div>
       <div class="fee-row">
-        <div class="fee">Contact for details</div>
-        <a href="#" class="mini-btn" target="_blank" rel="noopener">Register</a>
+        <div class="fee">₹700/mo <small>Reg. fee ₹200</small></div>
+        <a href="#" class="mini-btn wa-register" data-msg="Assalamu Alaikum, I want to take admission in the Spoken Arabic Course (Level 3 - Al Arabiyatu Bayna Yadaik Book 2 Part 1). Please guide me about the admission test." target="_blank" rel="noopener">Register</a>
+      </div>
+    </div>
+
+    <div class="course-card">
+      <div class="card-top">
+        <span class="tag">Level 1</span>
+        <span class="tag">Ongoing</span>
+      </div>
+      <h3>Arabic Grammar &mdash; Level 1</h3>
+      <div class="meta">
+        <span>&#128218; Mirqaat ul Qawaid (by Shaikh Shahrukh)</span>
+        <span>&#128337; Mon&ndash;Sat, 2:00&ndash;3:00 PM IST</span>
+        <span>&#128100; Shaikh Shahrukh Salafi Hafizahullah</span>
+        <span>&#9888;&#65039; Mid-course admission requires a test</span>
+      </div>
+      <div class="fee-row">
+        <div class="fee">Live interactive class</div>
+        <a href="#" class="mini-btn wa-register" data-msg="Assalamu Alaikum, I want to take admission in the Arabic Grammar Course - Level 1 (Mirqaat ul Qawaid). Please guide me about the admission test." target="_blank" rel="noopener">Register</a>
+      </div>
+    </div>
+
+    <div class="course-card level-2">
+      <div class="card-top">
+        <span class="tag">Level 2</span>
+        <span class="tag">Ongoing</span>
+      </div>
+      <h3>Arabic Grammar &mdash; Level 2</h3>
+      <div class="meta">
+        <span>&#128218; Mirqaat ul Qawaid (by Shaikh Shahrukh)</span>
+        <span>&#128337; Mon&ndash;Sat, 8:15&ndash;9:00 PM IST</span>
+        <span>&#128100; Shaikh Shahrukh Salafi Hafizahullah</span>
+        <span>&#9888;&#65039; Mid-course admission requires a test</span>
+      </div>
+      <div class="fee-row">
+        <div class="fee">Live interactive class</div>
+        <a href="#" class="mini-btn wa-register" data-msg="Assalamu Alaikum, I want to take admission in the Arabic Grammar Course - Level 2 (Mirqaat ul Qawaid). Please guide me about the admission test." target="_blank" rel="noopener">Register</a>
+      </div>
+    </div>
+
+    <div class="course-card level-3">
+      <div class="card-top">
+        <span class="tag">Level 3</span>
+        <span class="tag">Ongoing</span>
+      </div>
+      <h3>Arabic Grammar &mdash; Level 3</h3>
+      <div class="meta">
+        <span>&#128218; Mirqaat ul Qawaid (by Shaikh Shahrukh)</span>
+        <span>&#128337; Mon&ndash;Sat, 9:00&ndash;10:00 PM IST</span>
+        <span>&#128100; Shaikh Shahrukh Salafi Hafizahullah</span>
+        <span>&#9888;&#65039; Mid-course admission requires a test</span>
+      </div>
+      <div class="fee-row">
+        <div class="fee">Live interactive class</div>
+        <a href="#" class="mini-btn wa-register" data-msg="Assalamu Alaikum, I want to take admission in the Arabic Grammar Course - Level 3 (Mirqaat ul Qawaid). Please guide me about the admission test." target="_blank" rel="noopener">Register</a>
       </div>
     </div>
 
@@ -668,22 +770,24 @@
       </div>
       <div class="fee-row">
         <div class="fee">Free</div>
-        <a href="#" class="mini-btn" target="_blank" rel="noopener">Register</a>
+        <a href="https://whatsapp.com/channel/0029VbBDGtIC6ZvgX7o1IO1y" class="mini-btn" target="_blank" rel="noopener">Join Channel</a>
       </div>
     </div>
 
     <div class="course-card level-2">
       <div class="card-top">
-        <span class="tag">Weekly</span>
+        <span class="tag">Ongoing</span>
         <span class="tag">Brothers &amp; Sisters</span>
       </div>
-      <h3>Seerat-e-Nabi</h3>
+      <h3>Seerat Course</h3>
       <div class="meta">
-        <span>&#128218; Life of the Prophet ﷺ, taught weekly</span>
-        <span>&#128100; Shahrukh Salafi Hafizahullah</span>
+        <span>&#128218; Tajalliyyat e Nubuwwat</span>
+        <span>&#128337; Mon&ndash;Thu, 5:30&ndash;6:15 PM IST</span>
+        <span>&#128100; Shaikh Umair Salafi Hafizahullah</span>
+        <span>&#128221; Weekly quiz every Sunday &mdash; see below</span>
       </div>
       <div class="fee-row">
-        <div class="fee">See Seerat section</div>
+        <div class="fee">PDF, playlist &amp; quiz below</div>
         <a href="#seerat" class="mini-btn">Go to Section</a>
       </div>
     </div>
@@ -699,35 +803,36 @@
      ============================================================ -->
 <section class="seerat-section" id="seerat">
   <div class="section-head">
-    <div class="eyebrow">Weekly Class</div>
-    <h2>Seerat-e-Nabi ﷺ</h2>
-    <p>By Shahrukh Salafi Hafizahullah &mdash; notes, recordings, and weekly quizzes, all in one place.</p>
+    <div class="eyebrow">Mon&ndash;Thu &middot; 5:30&ndash;6:15 PM IST</div>
+    <h2>Seerat Course</h2>
+    <p>Tajalliyyat e Nubuwwat, by Shaikh Umair Salafi Hafizahullah. The class itself runs Monday to Thursday &mdash; only the quiz below is weekly.</p>
   </div>
 
   <div class="seerat-tabs">
-    <button class="seerat-tab-btn active" data-tab="notes">Course PDF</button>
-    <button class="seerat-tab-btn" data-tab="playlist">YouTube Playlist</button>
+    <button class="seerat-tab-btn active" data-tab="playlist">YouTube Playlist</button>
+    <button class="seerat-tab-btn" data-tab="notes">Course PDF</button>
     <button class="seerat-tab-btn" data-tab="attempt">Attempt Weekly Quiz</button>
     <button class="seerat-tab-btn" data-tab="results">Weekly Quiz Results</button>
   </div>
 
   <div class="seerat-panels">
 
-    <div class="seerat-panel active" id="panel-notes">
+    <div class="seerat-panel active" id="panel-playlist">
       <div class="seerat-card">
-        <h3>Course Notes (PDF)</h3>
-        <p>All Seerat-e-Nabi notes, compiled and shared as a Google Drive PDF.</p>
-        <!-- EDIT HERE: replace # with your Google Drive PDF link -->
-        <a href="#" class="btn btn-primary" target="_blank" rel="noopener">Open PDF on Drive</a>
+        <h3>YouTube Playlist</h3>
+        <p>Watch every Seerat class in order.</p>
+        <div style="position:relative; padding-bottom:56.25%; height:0; border-radius:14px; overflow:hidden; box-shadow:var(--shadow);">
+          <!-- EDIT HERE: replace the list= ID if the playlist link ever changes -->
+          <iframe src="https://www.youtube.com/embed/videoseries?list=PLfvPEkc-Zy4E" title="Seerat Course Playlist" style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;" allowfullscreen></iframe>
+        </div>
       </div>
     </div>
 
-    <div class="seerat-panel" id="panel-playlist">
+    <div class="seerat-panel" id="panel-notes">
       <div class="seerat-card">
-        <h3>YouTube Playlist</h3>
-        <p>Watch every Seerat-e-Nabi class in order.</p>
-        <!-- EDIT HERE: replace # with your YouTube playlist link -->
-        <a href="#" class="btn btn-primary" target="_blank" rel="noopener">Open Playlist on YouTube</a>
+        <h3>Course Notes (PDF)</h3>
+        <p>Seerat Course notes, compiled and shared as a Google Drive PDF.</p>
+        <a href="https://drive.google.com/file/d/1KPl8uyD3OYNf2HXVZ7ZGNIsxNPg_JQDl/view?usp=sharing" class="btn btn-primary" target="_blank" rel="noopener">Open PDF on Drive</a>
       </div>
     </div>
 
@@ -739,7 +844,7 @@
           <span>&#128337; 8:00 AM &ndash; 11:00 PM IST</span>
         </div>
         <p>The quiz link becomes active only during the window above.</p>
-        <!-- EDIT HERE: update the href link and the timestamp text each week -->
+        <!-- EDIT HERE: update the href link every week -->
         <a href="#" class="btn btn-primary" target="_blank" rel="noopener">Attempt Quiz</a>
       </div>
     </div>
@@ -755,7 +860,7 @@
           Newest quiz should go at the top of the list.
         -->
         <div class="quiz-list" id="quizResultsList">
-          <a href="#" target="_blank" rel="noopener">
+          <a href="https://mukhlisa-collab.github.io/Seeratcourseresult/" target="_blank" rel="noopener">
             <span>Quiz 1 &mdash; 5 July 2026</span>
             <span class="arrow">&#8594;</span>
           </a>
@@ -786,32 +891,84 @@
   </div>
 
   <div class="duroos-grid" id="duroosGrid">
-    <!-- EDIT HERE: replace VIDEO_ID_1, VIDEO_ID_2... with real YouTube video IDs,
-         and set the title text. The thumbnail image loads automatically. -->
+    <!-- EDIT HERE: to add a new durs, copy one block below, set the
+         video ID (from the youtu.be/VIDEO_ID link) and the title. -->
 
-    <a class="duroos-card" href="https://www.youtube.com/watch?v=VIDEO_ID_1" target="_blank" rel="noopener">
+    <a class="duroos-card" href="https://youtu.be/WJUMeHtaVm4" target="_blank" rel="noopener">
       <div class="duroos-thumb">
-        <img src="https://img.youtube.com/vi/VIDEO_ID_1/maxresdefault.jpg" alt="Durs thumbnail" onerror="this.src='https://img.youtube.com/vi/VIDEO_ID_1/hqdefault.jpg'">
+        <img src="https://img.youtube.com/vi/WJUMeHtaVm4/maxresdefault.jpg" alt="Durs thumbnail" onerror="this.src='https://img.youtube.com/vi/WJUMeHtaVm4/hqdefault.jpg'">
         <div class="play"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div>
       </div>
-      <div class="cap"><h4>Durs Title Goes Here</h4></div>
+      <div class="cap"><h4>Durs 1</h4></div>
     </a>
 
-    <a class="duroos-card" href="https://www.youtube.com/watch?v=VIDEO_ID_2" target="_blank" rel="noopener">
+    <a class="duroos-card" href="https://youtu.be/8RSTu5Gd970" target="_blank" rel="noopener">
       <div class="duroos-thumb">
-        <img src="https://img.youtube.com/vi/VIDEO_ID_2/maxresdefault.jpg" alt="Durs thumbnail" onerror="this.src='https://img.youtube.com/vi/VIDEO_ID_2/hqdefault.jpg'">
+        <img src="https://img.youtube.com/vi/8RSTu5Gd970/maxresdefault.jpg" alt="Durs thumbnail" onerror="this.src='https://img.youtube.com/vi/8RSTu5Gd970/hqdefault.jpg'">
         <div class="play"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div>
       </div>
-      <div class="cap"><h4>Durs Title Goes Here</h4></div>
+      <div class="cap"><h4>Durs 2</h4></div>
     </a>
 
-    <a class="duroos-card" href="https://www.youtube.com/watch?v=VIDEO_ID_3" target="_blank" rel="noopener">
+    <a class="duroos-card" href="https://youtu.be/QgN9eQn1AMI" target="_blank" rel="noopener">
       <div class="duroos-thumb">
-        <img src="https://img.youtube.com/vi/VIDEO_ID_3/maxresdefault.jpg" alt="Durs thumbnail" onerror="this.src='https://img.youtube.com/vi/VIDEO_ID_3/hqdefault.jpg'">
+        <img src="https://img.youtube.com/vi/QgN9eQn1AMI/maxresdefault.jpg" alt="Durs thumbnail" onerror="this.src='https://img.youtube.com/vi/QgN9eQn1AMI/hqdefault.jpg'">
         <div class="play"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div>
       </div>
-      <div class="cap"><h4>Durs Title Goes Here</h4></div>
+      <div class="cap"><h4>Durs 3</h4></div>
     </a>
+
+    <a class="duroos-card" href="https://youtu.be/osde_k8R25M" target="_blank" rel="noopener">
+      <div class="duroos-thumb">
+        <img src="https://img.youtube.com/vi/osde_k8R25M/maxresdefault.jpg" alt="Durs thumbnail" onerror="this.src='https://img.youtube.com/vi/osde_k8R25M/hqdefault.jpg'">
+        <div class="play"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div>
+      </div>
+      <div class="cap"><h4>Durs 4</h4></div>
+    </a>
+
+  </div>
+
+  <div class="duroos-subhead">
+    <h3>Free Course Playlists</h3>
+    <div class="rule"></div>
+  </div>
+
+  <div class="duroos-grid">
+    <!-- EDIT HERE: these are playlists (no single-video thumbnail), so they
+         use an icon card instead. Update the href and title as needed. -->
+
+    <a class="duroos-card playlist-card" href="https://youtube.com/playlist?list=PL0hM-w_Ph_2rpnmImg_C9Nw2fMLMy7Ffr" target="_blank" rel="noopener">
+      <div class="duroos-thumb"><div class="badge-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      <div class="cap"><h4>Free Course Playlist 1</h4></div>
+    </a>
+
+    <a class="duroos-card playlist-card" href="https://youtube.com/playlist?list=PL0hM-w_Ph_2pJslK8scSLcUdZ8UeRPxi2" target="_blank" rel="noopener">
+      <div class="duroos-thumb"><div class="badge-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      <div class="cap"><h4>Free Course Playlist 2</h4></div>
+    </a>
+
+    <a class="duroos-card playlist-card" href="https://youtube.com/playlist?list=PL0hM-w_Ph_2oKILRuwyvHPvcwobAzX_VQ" target="_blank" rel="noopener">
+      <div class="duroos-thumb"><div class="badge-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      <div class="cap"><h4>Free Course Playlist 3</h4></div>
+    </a>
+
+    <a class="duroos-card playlist-card" href="https://youtube.com/playlist?list=PL0hM-w_Ph_2qRVvef493IIFGEwGySgjmu" target="_blank" rel="noopener">
+      <div class="duroos-thumb"><div class="badge-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      <div class="cap"><h4>Free Course Playlist 4</h4></div>
+    </a>
+
+    <a class="duroos-card playlist-card" href="https://youtube.com/playlist?list=PL0hM-w_Ph_2oazdEGIBy05d8ksef40Nm8" target="_blank" rel="noopener">
+      <div class="duroos-thumb"><div class="badge-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      <div class="cap"><h4>Free Course Playlist 5</h4></div>
+    </a>
+
+    <!-- EDIT HERE: replace the href once Qasas un Nabiyyeen Part 2 is uploaded,
+         and remove the coming-soon-tag + coming-soon class -->
+    <div class="duroos-card playlist-card coming-soon" style="position:relative;">
+      <span class="coming-soon-tag">Coming Soon</span>
+      <div class="duroos-thumb"><div class="badge-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      <div class="cap"><h4>Qasas un Nabiyyeen &mdash; Part 2</h4></div>
+    </div>
 
   </div>
 </section>
@@ -848,7 +1005,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span>&copy; <span id="year"></span> Markaz Ibn Abbas. All rights reserved.</span>
+    <span>&copy; 2025 Markaz Ibn Abbas. All rights reserved.</span>
     <span>Built with care for the Ummah.</span>
   </div>
 </footer>
@@ -917,8 +1074,14 @@
     });
   });
 
-  // ---------- Footer year ----------
-  document.getElementById('year').textContent = new Date().getFullYear();
+  // ---------- WhatsApp prepared-message register buttons ----------
+  // Any button with class "wa-register" and a data-msg="..." attribute
+  // automatically gets a wa.me link built for it — no manual encoding needed.
+  var WHATSAPP_NUMBER = '919720971057';
+  document.querySelectorAll('.wa-register').forEach(function(btn){
+    var msg = btn.dataset.msg || '';
+    btn.href = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(msg);
+  });
 </script>
 
 </body>
