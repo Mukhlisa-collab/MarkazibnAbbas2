@@ -486,20 +486,40 @@
   .duroos-subhead h3{margin:0; font-size:1.15rem; white-space:nowrap;}
   .duroos-subhead .rule{flex:1; height:1px; background:linear-gradient(90deg, var(--saffron), transparent);}
 
+  .playlist-card{cursor:pointer;}
   .playlist-card .duroos-thumb{
-    background:linear-gradient(150deg, var(--deep-green) 0%, var(--copper) 130%);
+    background:var(--ink);
+  }
+  .playlist-card .duroos-thumb iframe{
+    width:100%; height:100%; border:0; pointer-events:none;
+  }
+  .playlist-card .duroos-thumb .open-overlay{
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(15,59,46,0);
+    transition:background .2s;
+  }
+  .playlist-card:hover .duroos-thumb .open-overlay{background:rgba(15,59,46,.28);}
+  .playlist-card .duroos-thumb .open-overlay span{
+    width:56px; height:56px; border-radius:50%;
+    background:rgba(239,148,16,.94);
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; transition:opacity .2s;
+    box-shadow:0 8px 22px rgba(0,0,0,.35);
+  }
+  .playlist-card:hover .duroos-thumb .open-overlay span{opacity:1;}
+  .playlist-card .duroos-thumb .open-overlay svg{width:20px; height:20px; fill:var(--deep-green-2); margin-left:3px;}
+  .playlist-card.coming-soon .duroos-thumb{
+    background:linear-gradient(150deg, #8a8f8c 0%, #565b58 130%);
     display:flex; align-items:center; justify-content:center;
   }
-  .playlist-card .duroos-thumb .badge-icon{
+  .playlist-card.coming-soon .badge-icon{
     width:64px; height:64px; border-radius:50%;
     background:rgba(255,255,255,.12);
     border:2px solid var(--saffron-light);
     display:flex; align-items:center; justify-content:center;
   }
-  .playlist-card .duroos-thumb .badge-icon svg{width:26px; height:26px; fill:var(--ivory-white);}
-  .playlist-card.coming-soon .duroos-thumb{
-    background:linear-gradient(150deg, #8a8f8c 0%, #565b58 130%);
-  }
+  .playlist-card.coming-soon .badge-icon svg{width:26px; height:26px; fill:var(--ivory-white);}
   .coming-soon-tag{
     position:absolute; top:12px; right:12px;
     background:var(--saffron);
@@ -934,36 +954,56 @@
   </div>
 
   <div class="duroos-grid">
-    <!-- EDIT HERE: these are playlists (no single-video thumbnail), so they
-         use an icon card instead. Update the href and title as needed. -->
+    <!-- EDIT HERE: these show a real live YouTube thumbnail via an embedded
+         player (same trick as the Seerat playlist tab). To add a new one,
+         copy a block below and change: the onclick URL, the list= ID in the
+         iframe src, and the <h4> title.
+         NOTE: these use <div onclick=...> instead of <a href=...> because an
+         <iframe> is not allowed to sit inside a link tag — nesting it that
+         way is what made the thumbnails disappear before. -->
 
-    <a class="duroos-card playlist-card" href="https://youtube.com/playlist?list=PL0hM-w_Ph_2rpnmImg_C9Nw2fMLMy7Ffr" target="_blank" rel="noopener">
-      <div class="duroos-thumb"><div class="badge-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+    <div class="duroos-card playlist-card" onclick="window.open('https://youtube.com/playlist?list=PL0hM-w_Ph_2rpnmImg_C9Nw2fMLMy7Ffr','_blank')">
+      <div class="duroos-thumb">
+        <iframe src="https://www.youtube.com/embed/videoseries?list=PL0hM-w_Ph_2rpnmImg_C9Nw2fMLMy7Ffr" title="Free Course Playlist 1" loading="lazy" allowfullscreen></iframe>
+        <div class="open-overlay"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div>
+      </div>
       <div class="cap"><h4>Free Course Playlist 1</h4></div>
-    </a>
+    </div>
 
-    <a class="duroos-card playlist-card" href="https://youtube.com/playlist?list=PL0hM-w_Ph_2pJslK8scSLcUdZ8UeRPxi2" target="_blank" rel="noopener">
-      <div class="duroos-thumb"><div class="badge-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+    <div class="duroos-card playlist-card" onclick="window.open('https://youtube.com/playlist?list=PL0hM-w_Ph_2pJslK8scSLcUdZ8UeRPxi2','_blank')">
+      <div class="duroos-thumb">
+        <iframe src="https://www.youtube.com/embed/videoseries?list=PL0hM-w_Ph_2pJslK8scSLcUdZ8UeRPxi2" title="Free Course Playlist 2" loading="lazy" allowfullscreen></iframe>
+        <div class="open-overlay"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div>
+      </div>
       <div class="cap"><h4>Free Course Playlist 2</h4></div>
-    </a>
+    </div>
 
-    <a class="duroos-card playlist-card" href="https://youtube.com/playlist?list=PL0hM-w_Ph_2oKILRuwyvHPvcwobAzX_VQ" target="_blank" rel="noopener">
-      <div class="duroos-thumb"><div class="badge-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+    <div class="duroos-card playlist-card" onclick="window.open('https://youtube.com/playlist?list=PL0hM-w_Ph_2oKILRuwyvHPvcwobAzX_VQ','_blank')">
+      <div class="duroos-thumb">
+        <iframe src="https://www.youtube.com/embed/videoseries?list=PL0hM-w_Ph_2oKILRuwyvHPvcwobAzX_VQ" title="Free Course Playlist 3" loading="lazy" allowfullscreen></iframe>
+        <div class="open-overlay"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div>
+      </div>
       <div class="cap"><h4>Free Course Playlist 3</h4></div>
-    </a>
+    </div>
 
-    <a class="duroos-card playlist-card" href="https://youtube.com/playlist?list=PL0hM-w_Ph_2qRVvef493IIFGEwGySgjmu" target="_blank" rel="noopener">
-      <div class="duroos-thumb"><div class="badge-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+    <div class="duroos-card playlist-card" onclick="window.open('https://youtube.com/playlist?list=PL0hM-w_Ph_2qRVvef493IIFGEwGySgjmu','_blank')">
+      <div class="duroos-thumb">
+        <iframe src="https://www.youtube.com/embed/videoseries?list=PL0hM-w_Ph_2qRVvef493IIFGEwGySgjmu" title="Free Course Playlist 4" loading="lazy" allowfullscreen></iframe>
+        <div class="open-overlay"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div>
+      </div>
       <div class="cap"><h4>Free Course Playlist 4</h4></div>
-    </a>
+    </div>
 
-    <a class="duroos-card playlist-card" href="https://youtube.com/playlist?list=PL0hM-w_Ph_2oazdEGIBy05d8ksef40Nm8" target="_blank" rel="noopener">
-      <div class="duroos-thumb"><div class="badge-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+    <div class="duroos-card playlist-card" onclick="window.open('https://youtube.com/playlist?list=PL0hM-w_Ph_2oazdEGIBy05d8ksef40Nm8','_blank')">
+      <div class="duroos-thumb">
+        <iframe src="https://www.youtube.com/embed/videoseries?list=PL0hM-w_Ph_2oazdEGIBy05d8ksef40Nm8" title="Free Course Playlist 5" loading="lazy" allowfullscreen></iframe>
+        <div class="open-overlay"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div>
+      </div>
       <div class="cap"><h4>Free Course Playlist 5</h4></div>
-    </a>
+    </div>
 
-    <!-- EDIT HERE: replace the href once Qasas un Nabiyyeen Part 2 is uploaded,
-         and remove the coming-soon-tag + coming-soon class -->
+    <!-- EDIT HERE: replace the onclick URL once Qasas un Nabiyyeen Part 2 is
+         uploaded, and remove the coming-soon-tag + coming-soon class -->
     <div class="duroos-card playlist-card coming-soon" style="position:relative;">
       <span class="coming-soon-tag">Coming Soon</span>
       <div class="duroos-thumb"><div class="badge-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
